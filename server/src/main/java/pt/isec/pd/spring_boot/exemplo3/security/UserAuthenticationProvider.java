@@ -1,6 +1,7 @@
 package pt.isec.pd.spring_boot.exemplo3.security;
 
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -34,8 +35,10 @@ public class UserAuthenticationProvider implements AuthenticationProvider
             authorities.add(new SimpleGrantedAuthority("USER"));
             System.out.println("Bem vindo user");
             return new UsernamePasswordAuthenticationToken(username, password, authorities);
+        }else {
+            // Se o usuário não existe, você pode lançar uma exceção ou simplesmente retornar null
+            throw new BadCredentialsException("Usuário não encontrado");
         }
-        return new UsernamePasswordAuthenticationToken(username, password, authorities);
 
 
         //return null;
