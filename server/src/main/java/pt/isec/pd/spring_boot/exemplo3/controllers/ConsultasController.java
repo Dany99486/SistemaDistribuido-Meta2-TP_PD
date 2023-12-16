@@ -49,10 +49,12 @@ public class ConsultasController {
 
         String cc= Evento.getCCFromUsername(Username,args, "serverdatabase.db");
         //Cliente
-        if (Objects.equals(arg1, PRESENCAS) &&arg3==null){
+        if (Objects.equals(arg1, PRESENCAS) &&arg3==null&&!AuthUtils.isAdmin(authentication)){
             if (arg2==null) arg2="sem_filtro";
             resultado=Evento.consultaPresencasClienteFiltro(cc,arg2, args, "serverdatabase.db");
-
+            System.out.println("res:"+resultado);
+            if (resultado.equals("")) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Esse evento não existe");
+            else return ResponseEntity.ok(resultado);
         }
         //Admin
         if(AuthUtils.isAdmin(authentication)){
@@ -62,9 +64,11 @@ public class ConsultasController {
             } else if(Objects.equals(arg1, PRESENCAS) && arg3==null) {
                 resultado=Evento.consultaPresenca(arg2, args, "serverdatabase.db");
             }
+            System.out.println("res:"+resultado);
+            if (resultado.equals("Erro ao conectar à base de dados")) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Parametros errados");
+            if (resultado.equals("")) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Esse evento não existe");
+            return ResponseEntity.ok(resultado);
         }else return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found");
 
-        System.out.println(resultado);
-        return ResponseEntity.ok(resultado);
     }
 }

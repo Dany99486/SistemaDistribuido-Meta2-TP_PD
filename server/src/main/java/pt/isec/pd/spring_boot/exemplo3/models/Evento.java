@@ -131,7 +131,7 @@ public class Evento {
                     String query = "SELECT eventos.nome FROM eventos " +
                             "LEFT JOIN presencas ON eventos.idEvento = presencas.idEvento " +
                             "WHERE eventos.nome = '" + nome + "' AND eventos.codigo IS NULL;";
-
+            System.out.println(query);
                     PreparedStatement preparedStatement = connection.prepareStatement(query);
                     ResultSet result = preparedStatement.executeQuery();
 

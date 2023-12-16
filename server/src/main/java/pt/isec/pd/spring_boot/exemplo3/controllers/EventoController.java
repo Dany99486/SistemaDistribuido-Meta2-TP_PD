@@ -80,7 +80,7 @@ public class EventoController {
             if (Objects.equals(arg1, EVENTO) && Objects.equals(arg2, APAGAR) && arg3 != null) {
                 int res=Evento.eliminaEvento(arg3, args, "serverdatabase.db");
                 if (res==1) return ResponseEntity.ok("Evento eliminado com sucesso!");
-                else if (res==0) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nao existe esse evento!");
+                else if (res==0) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nao existe esse evento ou ja tem codigo!");
                 else return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro do servidor");
             }
         }
