@@ -20,11 +20,10 @@ public class RegisterController {
 
     }
     @PostMapping("/register")
-    public ResponseEntity<String> register(Authentication authentication,
-                                           @RequestParam(value = "name", required = true) String name,
-                                           @RequestParam(value="password", required=true) String password,
-                                           @RequestParam(value="cc", required=true) String cc,
-                                           @RequestParam(value="email", required=true) String email) {
+    public ResponseEntity<String> register(@RequestParam(value = "name") String name,
+                                           @RequestParam(value="password") String password,
+                                           @RequestParam(value="cc") String cc,
+                                           @RequestParam(value="email") String email) {
         // Verifique se o usuário já existe
         int registed= BD.registClient(name, password, cc, email,args, "serverdatabase.db");
         if ( registed== 0) {
