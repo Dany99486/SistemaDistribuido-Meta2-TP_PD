@@ -162,7 +162,7 @@ public class ClienteApplication {
                             String horainicio = scanner.next();
                             System.out.print("Hora de fim do evento:\n->");
                             String horafim = scanner.next();
-                            uri = "http://localhost:8080/Evento?arg1=EVENTO&arg2=" + nome + "&arg3=" + datainicio + "&arg4=" + datafim + "&arg5=" + local + "&arg6=" + horainicio + "&arg7=" + horafim;
+                            uri = "http://localhost:8080/Evento?arg1=EVENTO&nome=" + nome + "&data_inicio=" + datainicio + "&data_fim=" + datafim + "&local=" + local + "&horaInicio=" + horainicio + "&horaFim=" + horafim;
                             response = sendRequestAndShowResponse(uri, "POST", "bearer " + token);
                             System.out.println("server response:" + response);
                             if (response==null) timeout=true;
@@ -171,7 +171,7 @@ public class ClienteApplication {
                         case 3 -> {
                             System.out.print("Nome do evento a eliminar:\n->");
                             String name = scanner.next();
-                            uri = "http://localhost:8080/Evento?arg1=EVENTO&arg2=APAGAR&arg3=" + name;
+                            uri = "http://localhost:8080/Evento?arg1=EVENTO&arg2=APAGAR&nomeEvento=" + name;
                             response = sendRequestAndShowResponse(uri, "DELETE", "bearer " + token);
                             System.out.println("server response:" + response);
                             if (response==null) timeout=true;
@@ -193,7 +193,7 @@ public class ClienteApplication {
                             String nomeevento = scanner.next();
                             System.out.println("Validade do codigo(horas):");
                             String validade = scanner.next();
-                            uri = "http://localhost:8080/Codigo?arg1=GERAR&arg2=" + nomeevento + "&arg3=" + validade;
+                            uri = "http://localhost:8080/Codigo?arg1=GERAR&nomeevento=" + nomeevento + "&validade=" + validade;
                             response = sendRequestAndShowResponse(uri, "PUT", "bearer " + token);
                             System.out.println("server response:" + response);
                             if (response==null) timeout=true;
@@ -222,7 +222,7 @@ public class ClienteApplication {
                         case 2 -> {
                             System.out.println("Insira o código:");
                             String codigo = scanner.next();
-                            uri = "http://localhost:8080/Codigo?arg1=CODIGO&arg3=" + codigo;
+                            uri = "http://localhost:8080/Codigo?arg1=CODIGO&code=" + codigo;
                             response = sendRequestAndShowResponse(uri, "POST", "bearer " + token);
                             System.out.println("server response:\n" + response);
                             if (response==null) timeout=true;
